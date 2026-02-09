@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniSmartHomeConsole", "MiniSmartHomeConsole\MiniSmartHomeConsole.csproj", "{0B90DAEA-5C75-48AA-947E-2BEC44F8055A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniSmartHomeLib", "MiniSmartHomeLib\MiniSmartHomeLib.csproj", "{05D5CECA-0D70-4F64-9236-67AE7905C4A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B90DAEA-5C75-48AA-947E-2BEC44F8055A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B90DAEA-5C75-48AA-947E-2BEC44F8055A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B90DAEA-5C75-48AA-947E-2BEC44F8055A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B90DAEA-5C75-48AA-947E-2BEC44F8055A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D5CECA-0D70-4F64-9236-67AE7905C4A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D5CECA-0D70-4F64-9236-67AE7905C4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D5CECA-0D70-4F64-9236-67AE7905C4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D5CECA-0D70-4F64-9236-67AE7905C4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7306D33-93BA-450F-977F-F284871B40B0}
+	EndGlobalSection
+EndGlobal

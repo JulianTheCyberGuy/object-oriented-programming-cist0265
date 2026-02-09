@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "MiniSmartHomeLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/MiniSmartHomeLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MiniSmartHomeLib.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MiniSmartHomeLib/1.0.0": {
+      "type": "project",
+      "path": "../MiniSmartHomeLib/MiniSmartHomeLib.csproj",
+      "msbuildProject": "../MiniSmartHomeLib/MiniSmartHomeLib.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "MiniSmartHomeLib >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/Users/julianflorez/.nuget/packages/": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/julianflorez/Library/CloudStorage/OneDrive-UniversityofPittsburgh/Soph Sem 2/Object Oriented Programming/Assignment 4/MiniSmartHomeLib/MiniSmartHomeLib.csproj": {
+              "projectPath": "/Users/julianflorez/Library/CloudStorage/OneDrive-UniversityofPittsburgh/Soph Sem 2/Object Oriented Programming/Assignment 4/MiniSmartHomeLib/MiniSmartHomeLib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
