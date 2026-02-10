@@ -3,18 +3,31 @@ using System.Collections.Generic;
 
 namespace MiniSmartHomeLib
 {
+    /*
+     * DeviceGroup
+     * -----------
+     * Simple controller that works with SmartDevice base types.
+     * 
+     * Demonstrates POLYMORPHISM:
+     * The group does not care what specific device type it holds.
+     */
     public class DeviceGroup
     {
+        // Internal list of devices (not exposed publicly)
         private readonly List<SmartDevice> _devices = new();
 
+        /*
+         * Adds a device to the group.
+         * Rejects null devices and duplicate DeviceIds.
+         */
         public void AddDevice(SmartDevice device)
         {
             if (device is null)
                 throw new ArgumentException("Device cannot be null.", nameof(device));
 
-            foreach (var d in _devices)
+            foreach (var existing in _devices)
             {
-                if (string.Equals(d.DeviceId, device.DeviceId, StringComparison.Ordinal))
+                if (existing.DeviceId == device.DeviceId)
                 {
                     throw new ArgumentException($"Duplicate device id: {device.DeviceId}", nameof(device));
                 }
@@ -23,19 +36,25 @@ namespace MiniSmartHomeLib
             _devices.Add(device);
         }
 
+        /*
+         * Turns off all devices in the group.
+         */
         public void TurnOffAll()
         {
-            foreach (var d in _devices)
+            foreach (var device in _devices)
             {
-                d.TurnOff();
+                device.TurnOff();
             }
         }
 
+        /*
+         * Prints the status of every device using polymorphism.
+         */
         public void PrintStatuses()
         {
-            foreach (var d in _devices)
+            foreach (var device in _devices)
             {
-                Console.WriteLine(d.GetStatus());
+                Console.WriteLine(device.GetStatus());
             }
         }
     }
