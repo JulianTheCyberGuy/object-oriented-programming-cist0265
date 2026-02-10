@@ -2,10 +2,10 @@ using System;
 
 namespace Assignment2_InteractingClasses
 {
-    // Derived class (IS-A Person).
+    // Derived class demonstrating inheritance
     public class Student : Person
     {
-        public string Major { get; private set; }
+        public string Major { get; private set; } = string.Empty;
 
         public Student(string id, string name, string major) : base(id, name)
         {
