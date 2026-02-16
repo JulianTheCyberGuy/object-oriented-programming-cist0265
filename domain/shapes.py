@@ -21,3 +21,29 @@ class Circle(Shape):
 
     def area(self) -> float:
         return pi * self.radius * self.radius
+
+
+@dataclass(frozen=True)
+class Rectangle(Shape):
+    width: float
+    height: float
+
+    def __post_init__(self):
+        if self.width <= 0 or self.height <= 0:
+            raise ValueError("width and height must be greater than 0")
+
+    def area(self) -> float:
+        return self.width * self.height
+
+
+@dataclass(frozen=True)
+class Triangle(Shape):
+    base: float
+    height: float
+
+    def __post_init__(self):
+        if self.base <= 0 or self.height <= 0:
+            raise ValueError("base and height must be greater than 0")
+
+    def area(self) -> float:
+        return 0.5 * self.base * self.height
