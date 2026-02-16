@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from math import pi
-
+from math import sqrt
 
 class Shape:
     @property
@@ -47,3 +47,14 @@ class Triangle(Shape):
 
     def area(self) -> float:
         return 0.5 * self.base * self.height
+
+@dataclass(frozen=True)
+class Hexagon(Shape):
+    side: float
+
+    def __post_init__(self):
+        if self.side <= 0:
+            raise ValueError("side must be greater than 0")
+
+    def area(self) -> float:
+        return (3 * sqrt(3) / 2) * self.side * self.side
