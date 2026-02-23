@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SmartHomeConsole/SmartHomeConsole.csproj" />
+  <Project Path="SmartHomeLib/SmartHomeLib.csproj" />
+</Solution>
