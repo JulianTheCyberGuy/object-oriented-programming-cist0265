@@ -1,0 +1,15 @@
+{
+  "name": "a6-registry-performance-lab",
+  "version": "1.0.0",
+  "description": "Student registry performance lab exploring Big O growth",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/homework/registry-starter.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
