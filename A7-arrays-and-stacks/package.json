@@ -1,0 +1,12 @@
+{
+  "name": "a7-arrays-and-stacks",
+  "version": "1.0.0",
+  "description": "CIST 0265 Week 8 Homework - Arrays and Stacks",
+  "main": "hw8_arrays.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node hw8_arrays.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
