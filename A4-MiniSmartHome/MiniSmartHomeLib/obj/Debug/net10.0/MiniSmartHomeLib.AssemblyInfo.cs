@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MiniSmartHomeLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b55fa51af76d48aebf370ea72a08631a6d40d95")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ee26e8cbb0631b1fb4080912a9746c55f404d1b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MiniSmartHomeLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MiniSmartHomeLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
