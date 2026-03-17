@@ -7,7 +7,8 @@ export default class AnalysisResult {
       totalRecords,
       groupedResults,
       topCountries,
-      conclusion
+      conclusion,
+      mostRecentYear
     }) {
       this.thesis = thesis;
       this.datasetName = datasetName;
@@ -17,5 +18,6 @@ export default class AnalysisResult {
       this.groupedResults = groupedResults;
       this.topCountries = topCountries;
       this.conclusion = conclusion;
+      this.mostRecentYear = mostRecentYear;
     }
   }
