@@ -1,0 +1,27 @@
+Project title
+
+    - Internet Access vs. GDP Per Capita Analysis
+
+Thesis
+
+    - Countries with higher internet access tend to have higher GDP per capita in the most recent shared reporting year.
+
+Why this works
+
+    - Specific: uses two measurable variables
+
+        - internet access percentage
+
+        - GDP per capita
+
+    - Testable: both values can be pulled from the World Bank API and compared numerically
+
+    - Bounded: limited to countries and the most recent reporting year both datasets share
+
+Variables
+
+    - Independent variable: Internet access percentage
+
+    - Dependent variable: GDP per capita
+
+    - Boundaries: countries with valid values for both metrics in the same year
