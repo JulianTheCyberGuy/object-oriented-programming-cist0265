@@ -53,7 +53,48 @@ export default class Analyzer {
       .slice(0, limit);
   }
 
-  analyze({ thesis, records, datasetName, datasetEndpoint }) {
+  calculateCorrelation(records) {
+    const valid = records.filter(
+      (r) =>
+        typeof r.internetUsersPercent === "number" &&
+        typeof r.gdpPerCapita === "number"
+    );
+  
+    const n = valid.length;
+    if (n === 0) return 0;
+  
+    const sumX = valid.reduce((sum, r) => sum + r.internetUsersPercent, 0);
+    const sumY = valid.reduce((sum, r) => sum + r.gdpPerCapita, 0);
+  
+    const sumXY = valid.reduce(
+      (sum, r) => sum + r.internetUsersPercent * r.gdpPerCapita,
+      0
+    );
+  
+    const sumX2 = valid.reduce(
+      (sum, r) => sum + r.internetUsersPercent ** 2,
+      0
+    );
+  
+    const sumY2 = valid.reduce(
+      (sum, r) => sum + r.gdpPerCapita ** 2,
+      0
+    );
+  
+    const numerator = n * sumXY - sumX * sumY;
+    const denominator = Math.sqrt(
+      (n * sumX2 - sumX ** 2) * (n * sumY2 - sumY ** 2)
+    );
+  
+    if (denominator === 0) return 0;
+  
+    return numerator / denominator;
+  }
+
+  analyze({ thesis, records, datasetName, datasetEndpoint, excludeOutliers = true }) {
+    // N/A
+    const correlation = this.calculateCorrelation(withoutOutliers);
+    
     // STEP 1: find most recent year
     const mostRecentYear = this.getMostRecentYear(records);
 
@@ -61,7 +102,7 @@ export default class Analyzer {
     let filtered = this.filterToYear(records, mostRecentYear);
 
     // STEP 3: what-if filter (remove outliers)
-    const withoutOutliers = this.removeOutliers(filtered);
+    const withoutOutliers = excludeOutliers ? this.removeOutliers(filtered) : filtered;
 
     // STEP 4: grouping
     const groups = this.groupByInternetAccess(withoutOutliers);
@@ -88,16 +129,17 @@ export default class Analyzer {
     }
 
     return new AnalysisResult({
-      thesis: thesis.statement,
-      datasetName,
-      datasetEndpoint,
-      methods:
-        "Filtered to most recent shared year, removed outliers, grouped by internet access, computed average GDP per capita.",
-      totalRecords: withoutOutliers.length,
-      groupedResults,
-      topCountries,
-      conclusion,
-      mostRecentYear
-    });
+        thesis: thesis.statement,
+        datasetName,
+        datasetEndpoint,
+        methods:
+          "Filtered to most recent year, removed outliers, grouped by internet access, computed averages and correlation.",
+        totalRecords: withoutOutliers.length,
+        groupedResults,
+        topCountries,
+        conclusion,
+        mostRecentYear,
+        correlation
+      });
   }
 }

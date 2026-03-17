@@ -8,7 +8,8 @@ export default class AnalysisResult {
       groupedResults,
       topCountries,
       conclusion,
-      mostRecentYear
+      mostRecentYear,
+      correlation
     }) {
       this.thesis = thesis;
       this.datasetName = datasetName;
@@ -19,5 +20,6 @@ export default class AnalysisResult {
       this.topCountries = topCountries;
       this.conclusion = conclusion;
       this.mostRecentYear = mostRecentYear;
+      this.correlation = correlation;
     }
   }

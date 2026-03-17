@@ -22,6 +22,9 @@ export function printHeader(title) {
     console.log("\nResults:");
     console.log(`Total valid records: ${result.totalRecords}`);
   
+    console.log("\nCorrelation (Internet vs GDP):");
+    console.log(result.correlation.toFixed(3));
+
     console.log("\nAverage GDP per Group:");
     console.log(`Low (<50%):    $${result.groupedResults.low.toFixed(2)}`);
     console.log(`Medium (50-80%): $${result.groupedResults.medium.toFixed(2)}`);

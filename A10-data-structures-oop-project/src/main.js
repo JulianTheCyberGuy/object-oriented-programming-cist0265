@@ -17,6 +17,8 @@ async function main() {
     }
   });
 
+  const excludeOutliers = process.argv.includes("--no-outliers") ? false : true;
+
   const apiClient = new ApiClient();
   const repository = new Repository();
   const cleaner = new Cleaner();
@@ -38,7 +40,8 @@ async function main() {
     records: repository.getAllRecords(),
     datasetName: "World Bank Indicators API",
     datasetEndpoint:
-      "IT.NET.USER.ZS and NY.GDP.PCAP.CD via World Bank v2 indicator endpoints"
+      "IT.NET.USER.ZS and NY.GDP.PCAP.CD via World Bank v2 indicator endpoints",
+    excludeOutliers
   });
 
   printResult(result);
