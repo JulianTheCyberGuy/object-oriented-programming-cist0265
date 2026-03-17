@@ -10,13 +10,91 @@ export default class Cleaner {
     return Number.isNaN(parsed) ? null : parsed;
   }
 
-  mergeDatasets(internetRows, gdpRows) {
-    // Phase 3: merge by country + year using a Map
-    // For now, return an empty list so the project runs cleanly
-    return [];
+  toYear(value) {
+    const parsed = Number(value);
+    return Number.isNaN(parsed) ? null : parsed;
   }
 
-  buildRecord(data) {
-    return new Record(data);
+  isValidCountryCode(countryCode) {
+    return typeof countryCode === "string" && /^[A-Z]{3}$/.test(countryCode);
+  }
+
+  buildKey(countryCode, year) {
+    return `${countryCode}-${year}`;
+  }
+
+  mergeDatasets(internetRows, gdpRows) {
+    const mergedMap = new Map();
+
+    for (const row of internetRows) {
+      const countryCode = row.countryiso3code;
+      const countryName = row.country?.value ?? null;
+      const year = this.toYear(row.date);
+      const internetUsersPercent = this.toNumber(row.value);
+
+      if (!this.isValidCountryCode(countryCode) || year === null || internetUsersPercent === null) {
+        continue;
+      }
+
+      const key = this.buildKey(countryCode, year);
+
+      mergedMap.set(key, {
+        countryName,
+        countryCode,
+        year,
+        internetUsersPercent,
+        gdpPerCapita: null
+      });
+    }
+
+    for (const row of gdpRows) {
+      const countryCode = row.countryiso3code;
+      const countryName = row.country?.value ?? null;
+      const year = this.toYear(row.date);
+      const gdpPerCapita = this.toNumber(row.value);
+
+      if (!this.isValidCountryCode(countryCode) || year === null || gdpPerCapita === null) {
+        continue;
+      }
+
+      const key = this.buildKey(countryCode, year);
+
+      if (mergedMap.has(key)) {
+        mergedMap.get(key).gdpPerCapita = gdpPerCapita;
+      } else {
+        mergedMap.set(key, {
+          countryName,
+          countryCode,
+          year,
+          internetUsersPercent: null,
+          gdpPerCapita
+        });
+      }
+    }
+
+    const mergedRecords = [];
+
+    for (const value of mergedMap.values()) {
+      if (
+        value.internetUsersPercent === null ||
+        value.gdpPerCapita === null ||
+        value.year === null ||
+        !value.countryName
+      ) {
+        continue;
+      }
+
+      mergedRecords.push(
+        new Record({
+          countryName: value.countryName,
+          countryCode: value.countryCode,
+          year: value.year,
+          internetUsersPercent: value.internetUsersPercent,
+          gdpPerCapita: value.gdpPerCapita
+        })
+      );
+    }
+
+    return mergedRecords;
   }
 }

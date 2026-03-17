@@ -22,10 +22,15 @@ async function main() {
   const cleaner = new Cleaner();
   const analyzer = new Analyzer();
 
+  console.log("Fetching internet usage data...");
   const internetRows = await apiClient.fetchInternetData();
+
+  console.log("Fetching GDP per capita data...");
   const gdpRows = await apiClient.fetchGdpData();
 
+  console.log("Merging and cleaning records...");
   const mergedRecords = cleaner.mergeDatasets(internetRows, gdpRows);
+
   repository.saveRecords(mergedRecords);
 
   const result = analyzer.analyze({
@@ -33,7 +38,7 @@ async function main() {
     records: repository.getAllRecords(),
     datasetName: "World Bank Indicators API",
     datasetEndpoint:
-      "https://api.worldbank.org/v2/country/all/indicator/IT.NET.USER.ZS?format=json&per_page=400 | https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=400"
+      "IT.NET.USER.ZS and NY.GDP.PCAP.CD via World Bank v2 indicator endpoints"
   });
 
   printResult(result);
