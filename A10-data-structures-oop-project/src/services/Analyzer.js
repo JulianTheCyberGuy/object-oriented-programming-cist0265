@@ -2,24 +2,26 @@ import AnalysisResult from "../domain/AnalysisResult.js";
 
 export default class Analyzer {
   getMostRecentYear(records) {
-    const years = new Set(records.map((r) => r.year));
+    const years = new Set(records.map((record) => record.year));
     return Math.max(...years);
   }
 
   filterToYear(records, year) {
-    return records.filter((r) => r.year === year);
+    return records.filter((record) => record.year === year);
   }
 
   removeOutliers(records) {
-    if (records.length === 0) return records;
+    if (records.length === 0) {
+      return records;
+    }
 
-    const gdpValues = records.map((r) => r.gdpPerCapita);
-    const avg =
-      gdpValues.reduce((sum, val) => sum + val, 0) / gdpValues.length;
+    const gdpValues = records.map((record) => record.gdpPerCapita);
+    const average =
+      gdpValues.reduce((sum, value) => sum + value, 0) / gdpValues.length;
 
-    const threshold = avg * 3; // simple outlier rule
+    const threshold = average * 3;
 
-    return records.filter((r) => r.gdpPerCapita <= threshold);
+    return records.filter((record) => record.gdpPerCapita <= threshold);
   }
 
   groupByInternetAccess(records) {
@@ -32,18 +34,24 @@ export default class Analyzer {
     for (const record of records) {
       const value = record.internetUsersPercent;
 
-      if (value < 50) groups.low.push(record);
-      else if (value <= 80) groups.medium.push(record);
-      else groups.high.push(record);
+      if (value < 50) {
+        groups.low.push(record);
+      } else if (value <= 80) {
+        groups.medium.push(record);
+      } else {
+        groups.high.push(record);
+      }
     }
 
     return groups;
   }
 
   averageGdp(records) {
-    if (records.length === 0) return 0;
+    if (records.length === 0) {
+      return 0;
+    }
 
-    const total = records.reduce((sum, r) => sum + r.gdpPerCapita, 0);
+    const total = records.reduce((sum, record) => sum + record.gdpPerCapita, 0);
     return total / records.length;
   }
 
@@ -54,57 +62,71 @@ export default class Analyzer {
   }
 
   calculateCorrelation(records) {
-    const valid = records.filter(
-      (r) =>
-        typeof r.internetUsersPercent === "number" &&
-        typeof r.gdpPerCapita === "number"
+    const validRecords = records.filter(
+      (record) =>
+        typeof record.internetUsersPercent === "number" &&
+        typeof record.gdpPerCapita === "number"
     );
-  
-    const n = valid.length;
-    if (n === 0) return 0;
-  
-    const sumX = valid.reduce((sum, r) => sum + r.internetUsersPercent, 0);
-    const sumY = valid.reduce((sum, r) => sum + r.gdpPerCapita, 0);
-  
-    const sumXY = valid.reduce(
-      (sum, r) => sum + r.internetUsersPercent * r.gdpPerCapita,
+
+    const n = validRecords.length;
+
+    if (n === 0) {
+      return 0;
+    }
+
+    const sumX = validRecords.reduce(
+      (sum, record) => sum + record.internetUsersPercent,
       0
     );
-  
-    const sumX2 = valid.reduce(
-      (sum, r) => sum + r.internetUsersPercent ** 2,
+
+    const sumY = validRecords.reduce(
+      (sum, record) => sum + record.gdpPerCapita,
       0
     );
-  
-    const sumY2 = valid.reduce(
-      (sum, r) => sum + r.gdpPerCapita ** 2,
+
+    const sumXY = validRecords.reduce(
+      (sum, record) =>
+        sum + record.internetUsersPercent * record.gdpPerCapita,
       0
     );
-  
+
+    const sumX2 = validRecords.reduce(
+      (sum, record) => sum + record.internetUsersPercent ** 2,
+      0
+    );
+
+    const sumY2 = validRecords.reduce(
+      (sum, record) => sum + record.gdpPerCapita ** 2,
+      0
+    );
+
     const numerator = n * sumXY - sumX * sumY;
     const denominator = Math.sqrt(
       (n * sumX2 - sumX ** 2) * (n * sumY2 - sumY ** 2)
     );
-  
-    if (denominator === 0) return 0;
-  
+
+    if (denominator === 0) {
+      return 0;
+    }
+
     return numerator / denominator;
   }
 
-  analyze({ thesis, records, datasetName, datasetEndpoint, excludeOutliers = true }) {
-    // N/A
-    const correlation = this.calculateCorrelation(withoutOutliers);
-    
-    // STEP 1: find most recent year
+  analyze({
+    thesis,
+    records,
+    datasetName,
+    datasetEndpoint,
+    excludeOutliers = true
+  }) {
     const mostRecentYear = this.getMostRecentYear(records);
 
-    // STEP 2: filter to that year
-    let filtered = this.filterToYear(records, mostRecentYear);
+    const filtered = this.filterToYear(records, mostRecentYear);
 
-    // STEP 3: what-if filter (remove outliers)
-    const withoutOutliers = excludeOutliers ? this.removeOutliers(filtered) : filtered;
+    const withoutOutliers = excludeOutliers
+      ? this.removeOutliers(filtered)
+      : filtered;
 
-    // STEP 4: grouping
     const groups = this.groupByInternetAccess(withoutOutliers);
 
     const groupedResults = {
@@ -113,10 +135,9 @@ export default class Analyzer {
       high: this.averageGdp(groups.high)
     };
 
-    // STEP 5: top countries
     const topCountries = this.getTopCountries(withoutOutliers);
+    const correlation = this.calculateCorrelation(withoutOutliers);
 
-    // STEP 6: conclusion logic
     let conclusion = "Inconclusive";
 
     if (
@@ -129,17 +150,17 @@ export default class Analyzer {
     }
 
     return new AnalysisResult({
-        thesis: thesis.statement,
-        datasetName,
-        datasetEndpoint,
-        methods:
-          "Filtered to most recent year, removed outliers, grouped by internet access, computed averages and correlation.",
-        totalRecords: withoutOutliers.length,
-        groupedResults,
-        topCountries,
-        conclusion,
-        mostRecentYear,
-        correlation
-      });
+      thesis: thesis.statement,
+      datasetName,
+      datasetEndpoint,
+      methods:
+        "Filtered to the most recent shared year, optionally removed outliers, grouped countries by internet access, computed average GDP per capita, and calculated correlation.",
+      totalRecords: withoutOutliers.length,
+      groupedResults,
+      topCountries,
+      conclusion,
+      mostRecentYear,
+      correlation
+    });
   }
 }
