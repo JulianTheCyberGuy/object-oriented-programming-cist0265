@@ -153,8 +153,7 @@ export default class Analyzer {
       thesis: thesis.statement,
       datasetName,
       datasetEndpoint,
-      methods:
-        "Filtered to the most recent shared year, optionally removed outliers, grouped countries by internet access, computed average GDP per capita, and calculated correlation.",
+      methods:"Filtered to the most recent shared year, removed outliers, grouped countries by internet access level, computed average GDP per capita, and calculated correlation.",
       totalRecords: withoutOutliers.length,
       groupedResults,
       topCountries,

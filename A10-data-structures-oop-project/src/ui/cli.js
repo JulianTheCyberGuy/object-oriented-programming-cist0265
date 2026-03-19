@@ -1,3 +1,10 @@
+function formatCurrency(value) {
+    return `$${value.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
+  }
+
 export function printHeader(title) {
     console.log("\n==================================================");
     console.log(title);
@@ -23,20 +30,20 @@ export function printHeader(title) {
     console.log(`Total valid records: ${result.totalRecords}`);
   
     console.log("\nCorrelation (Internet vs GDP):");
-    console.log(result.correlation.toFixed(3));
+     console.log(result.correlation.toFixed(3));
 
     console.log("\nAverage GDP per Group:");
-    console.log(`Low (<50%):    $${result.groupedResults.low.toFixed(2)}`);
-    console.log(`Medium (50-80%): $${result.groupedResults.medium.toFixed(2)}`);
-    console.log(`High (>80%):   $${result.groupedResults.high.toFixed(2)}`);
+    console.log(`Low (<50%):    ${formatCurrency(result.groupedResults.low)}`);
+    console.log(`Medium (50-80%): ${formatCurrency(result.groupedResults.medium)}`);
+    console.log(`High (>80%):   ${formatCurrency(result.groupedResults.high)}`);
   
-    console.log("\nTop 10 Countries by GDP:");
+    console.log("\nTop 10 Countries by GDP per capita:");
     result.topCountries.forEach((c, i) => {
-      console.log(
-        `${i + 1}. ${c.countryName} - $${c.gdpPerCapita.toFixed(2)}`
-      );
+        console.log(`${i + 1}. ${c.countryName} - ${formatCurrency(c.gdpPerCapita)}`);
     });
   
     console.log("\nConclusion:");
     console.log(result.conclusion);
   }
+
+
