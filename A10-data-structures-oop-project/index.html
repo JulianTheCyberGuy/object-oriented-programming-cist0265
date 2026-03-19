@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internet Access vs GDP Analysis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Data-Driven OOP + Data Structures Mini-Project</h1>
+    <p class="subtitle">
+      Analyze whether countries with higher internet access tend to have higher GDP per capita.
+    </p>
+
+    <section class="controls">
+      <label class="checkbox-row">
+        <input type="checkbox" id="excludeOutliers" checked />
+        Exclude outliers
+      </label>
+
+      <button id="runAnalysisBtn">Run Analysis</button>
+    </section>
+
+    <section id="status" class="status">Ready.</section>
+
+    <section id="results" class="results hidden">
+      <h2>Results</h2>
+
+      <div class="card">
+        <h3>Thesis</h3>
+        <p id="thesisText"></p>
+      </div>
+
+      <div class="card">
+        <h3>Dataset</h3>
+        <p id="datasetText"></p>
+      </div>
+
+      <div class="card">
+        <h3>Year Used</h3>
+        <p id="yearText"></p>
+      </div>
+
+      <div class="card">
+        <h3>Methods</h3>
+        <p id="methodsText"></p>
+      </div>
+
+      <div class="card">
+        <h3>Summary Metrics</h3>
+        <p><strong>Total Valid Records:</strong> <span id="totalRecordsText"></span></p>
+        <p><strong>Correlation:</strong> <span id="correlationText"></span></p>
+      </div>
+
+      <div class="card">
+        <h3>Average GDP per Group</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Internet Access Group</th>
+              <th>Average GDP per Capita</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Low (&lt;50%)</td>
+              <td id="lowGroupText"></td>
+            </tr>
+            <tr>
+              <td>Medium (50-80%)</td>
+              <td id="mediumGroupText"></td>
+            </tr>
+            <tr>
+              <td>High (&gt;80%)</td>
+              <td id="highGroupText"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Top 10 Countries by GDP per Capita</h3>
+        <ol id="topCountriesList"></ol>
+      </div>
+
+      <div class="card">
+        <h3>Conclusion</h3>
+        <p id="conclusionText"></p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

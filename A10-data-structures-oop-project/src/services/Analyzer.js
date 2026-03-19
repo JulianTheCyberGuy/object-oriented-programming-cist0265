@@ -120,14 +120,13 @@ export default class Analyzer {
     excludeOutliers = true
   }) {
     const mostRecentYear = this.getMostRecentYear(records);
-
     const filtered = this.filterToYear(records, mostRecentYear);
 
-    const withoutOutliers = excludeOutliers
+    const finalRecords = excludeOutliers
       ? this.removeOutliers(filtered)
       : filtered;
 
-    const groups = this.groupByInternetAccess(withoutOutliers);
+    const groups = this.groupByInternetAccess(finalRecords);
 
     const groupedResults = {
       low: this.averageGdp(groups.low),
@@ -135,8 +134,8 @@ export default class Analyzer {
       high: this.averageGdp(groups.high)
     };
 
-    const topCountries = this.getTopCountries(withoutOutliers);
-    const correlation = this.calculateCorrelation(withoutOutliers);
+    const topCountries = this.getTopCountries(finalRecords);
+    const correlation = this.calculateCorrelation(finalRecords);
 
     let conclusion = "Inconclusive";
 
@@ -153,8 +152,9 @@ export default class Analyzer {
       thesis: thesis.statement,
       datasetName,
       datasetEndpoint,
-      methods:"Filtered to the most recent shared year, removed outliers, grouped countries by internet access level, computed average GDP per capita, and calculated correlation.",
-      totalRecords: withoutOutliers.length,
+      methods:
+        "Filtered to the most recent shared year, optionally removed outliers, grouped countries by internet access level, computed average GDP per capita, and calculated correlation.",
+      totalRecords: finalRecords.length,
       groupedResults,
       topCountries,
       conclusion,
