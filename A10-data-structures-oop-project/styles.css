@@ -1,92 +1,211 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --border: #dbe3ee;
+  --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --radius: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px 28px 32px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 1.35rem;
+}
+
+.controls {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.status {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.results.hidden {
+  display: none;
+}
+
+.results h2 {
+  margin: 0 0 18px;
+  font-size: 2.2rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 0.9fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  min-height: 150px;
+}
+
+.card h3 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.card.compact {
+  min-height: 120px;
+}
+
+.card.tall {
+  min-height: 220px;
+}
+
+.card.wide {
+  grid-column: span 2;
+}
+
+.card.full {
+  grid-column: 1 / -1;
+}
+
+.metrics-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.metric-line {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+thead th {
+  font-size: 0.95rem;
+}
+
+ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+ol li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1200px) {
+  .results-grid {
+    grid-template-columns: 1fr 1fr;
   }
-  
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #1f2937;
+
+  .card.wide {
+    grid-column: span 2;
   }
-  
+
+  .card.full {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
   .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 32px 20px 48px;
+    padding: 20px 16px 28px;
   }
-  
+
   h1 {
-    margin-bottom: 8px;
+    font-size: 2.2rem;
   }
-  
+
   .subtitle {
-    margin-top: 0;
-    margin-bottom: 24px;
-    color: #4b5563;
+    font-size: 1.1rem;
   }
-  
-  .controls {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+
+  .results-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .checkbox-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+
+  .card,
+  .card.wide,
+  .card.full {
+    grid-column: span 1;
+    min-height: auto;
   }
-  
-  button {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  button:hover {
-    background: #1d4ed8;
-  }
-  
-  button:disabled {
-    background: #93c5fd;
-    cursor: not-allowed;
-  }
-  
-  .status {
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-  
-  .results.hidden {
-    display: none;
-  }
-  
-  .card {
-    background: white;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th,
-  td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  ol {
-    padding-left: 22px;
-  }
+}

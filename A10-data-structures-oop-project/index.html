@@ -27,66 +27,76 @@
     <section id="results" class="results hidden">
       <h2>Results</h2>
 
-      <div class="card">
-        <h3>Thesis</h3>
-        <p id="thesisText"></p>
-      </div>
+      <div class="results-grid">
+        <div class="card compact">
+          <h3>Thesis</h3>
+          <p id="thesisText"></p>
+        </div>
 
-      <div class="card">
-        <h3>Dataset</h3>
-        <p id="datasetText"></p>
-      </div>
+        <div class="card compact">
+          <h3>Dataset</h3>
+          <p id="datasetText"></p>
+        </div>
 
-      <div class="card">
-        <h3>Year Used</h3>
-        <p id="yearText"></p>
-      </div>
+        <div class="card compact">
+          <h3>Year Used</h3>
+          <p id="yearText"></p>
+        </div>
 
-      <div class="card">
-        <h3>Methods</h3>
-        <p id="methodsText"></p>
-      </div>
+        <div class="card wide">
+          <h3>Methods</h3>
+          <p id="methodsText"></p>
+        </div>
 
-      <div class="card">
-        <h3>Summary Metrics</h3>
-        <p><strong>Total Valid Records:</strong> <span id="totalRecordsText"></span></p>
-        <p><strong>Correlation:</strong> <span id="correlationText"></span></p>
-      </div>
+        <div class="card compact">
+          <h3>Summary Metrics</h3>
+          <div class="metrics-stack">
+            <div class="metric-line">
+              <strong>Total Valid Records:</strong>
+              <span id="totalRecordsText"></span>
+            </div>
+            <div class="metric-line">
+              <strong>Correlation:</strong>
+              <span id="correlationText"></span>
+            </div>
+          </div>
+        </div>
 
-      <div class="card">
-        <h3>Average GDP per Group</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Internet Access Group</th>
-              <th>Average GDP per Capita</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Low (&lt;50%)</td>
-              <td id="lowGroupText"></td>
-            </tr>
-            <tr>
-              <td>Medium (50-80%)</td>
-              <td id="mediumGroupText"></td>
-            </tr>
-            <tr>
-              <td>High (&gt;80%)</td>
-              <td id="highGroupText"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="card">
+          <h3>Average GDP per Group</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Internet Access Group</th>
+                <th>Average GDP per Capita</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Low (&lt;50%)</td>
+                <td id="lowGroupText"></td>
+              </tr>
+              <tr>
+                <td>Medium (50-80%)</td>
+                <td id="mediumGroupText"></td>
+              </tr>
+              <tr>
+                <td>High (&gt;80%)</td>
+                <td id="highGroupText"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="card">
-        <h3>Top 10 Countries by GDP per Capita</h3>
-        <ol id="topCountriesList"></ol>
-      </div>
+        <div class="card tall">
+          <h3>Top 10 Countries by GDP per Capita</h3>
+          <ol id="topCountriesList"></ol>
+        </div>
 
-      <div class="card">
-        <h3>Conclusion</h3>
-        <p id="conclusionText"></p>
+        <div class="card compact">
+          <h3>Conclusion</h3>
+          <p id="conclusionText"></p>
+        </div>
       </div>
     </section>
   </main>
