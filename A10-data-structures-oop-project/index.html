@@ -8,21 +8,30 @@
 </head>
 <body>
   <main class="container">
-    <h1>Data-Driven OOP + Data Structures Mini-Project</h1>
-    <p class="subtitle">
-      Analyze whether countries with higher internet access tend to have higher GDP per capita.
-    </p>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-badge">World Bank Data Analysis</span>
+        <h1>Internet Access and GDP Insights</h1>
+        <p class="subtitle">
+          Explore how internet access levels compare with GDP per capita using live World Bank data.
+        </p>
+      </div>
 
-    <section class="controls">
-      <label class="checkbox-row">
-        <input type="checkbox" id="excludeOutliers" checked />
-        Exclude outliers
-      </label>
+      <div class="hero-panel">
+        <div class="control-card">
+          <div class="control-row">
+            <label class="checkbox-row">
+              <input type="checkbox" id="excludeOutliers" checked />
+              Exclude outliers
+            </label>
 
-      <button id="runAnalysisBtn">Run Analysis</button>
+            <button id="runAnalysisBtn">Run Analysis</button>
+          </div>
+
+          <div id="status" class="status">Ready to run analysis.</div>
+        </div>
+      </div>
     </section>
-
-    <section id="status" class="status">Ready.</section>
 
     <section id="results" class="results hidden">
       <h2>Results</h2>
