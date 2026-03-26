@@ -19,7 +19,25 @@ function renderResult(result) {
   document.getElementById("results").classList.remove("hidden");
 
   document.getElementById("thesisText").textContent = result.thesis;
-  document.getElementById("datasetText").textContent = result.datasetName;
+  document.getElementById("datasetText").innerHTML = `
+  <div class="dataset-block">
+    <div class="dataset-title">World Bank Indicators API</div>
+
+    <div class="dataset-links">
+      <button class="dataset-btn" onclick="window.open('https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation', '_blank')">
+        📄 Documentation
+      </button>
+
+      <button class="dataset-btn" onclick="window.open('https://api.worldbank.org/v2/country/all/indicator/IT.NET.USER.ZS?format=json&per_page=400', '_blank')">
+        🌐 Internet Data
+      </button>
+
+      <button class="dataset-btn" onclick="window.open('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&per_page=400', '_blank')">
+        💰 GDP Data
+      </button>
+    </div>
+  </div>
+`;
   document.getElementById("yearText").textContent = result.mostRecentYear;
   document.getElementById("methodsText").textContent = result.methods;
   document.getElementById("totalRecordsText").textContent = result.totalRecords;

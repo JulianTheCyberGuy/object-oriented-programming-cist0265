@@ -262,4 +262,64 @@ ol li {
   .control-row {
     align-items: flex-start;
   }
+  
+  .dataset-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .dataset-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+  
+  .dataset-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 760px;
+  }
+  
+  .dataset-btn {
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 56px;
+    width: 100%;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+  }
+  
+  .dataset-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.26);
+  }
+  
+  @media (max-width: 900px) {
+    .dataset-links {
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .dataset-links {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  body {
+    border: 10px solid red !important;
+  }
 }
